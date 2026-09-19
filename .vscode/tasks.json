@@ -1,0 +1,75 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "1. 配置并编译 (CMake Release)",
+      "type": "shell",
+      "command": "cmake -S . -B build -DCMAKE_BUILD_TYPE=Release && cmake --build build -j$(nproc)",
+      "options": { "cwd": "${workspaceFolder}" },
+      "group": { "kind": "build", "isDefault": true },
+      "problemMatcher": ["$gcc"],
+      "presentation": { "reveal": "always", "panel": "shared" }
+    },
+    {
+      "label": "2. 编译 (Debug, 便于断点调试)",
+      "type": "shell",
+      "command": "cmake -S . -B build-debug -DCMAKE_BUILD_TYPE=Debug && cmake --build build-debug -j$(nproc)",
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": ["$gcc"]
+    },
+    {
+      "label": "3. 运行单元测试",
+      "type": "shell",
+      "command": "${workspaceFolder}/build/scheduler_tests",
+      "dependsOn": ["1. 配置并编译 (CMake Release)"],
+      "options": { "cwd": "${workspaceFolder}" },
+      "group": { "kind": "test", "isDefault": true },
+      "presentation": { "reveal": "always", "panel": "shared" }
+    },
+    {
+      "label": "4. 初始化演示数据 (建表 + 种子数据)",
+      "type": "shell",
+      "command": "${workspaceFolder}/build/scheduler init-db",
+      "dependsOn": ["1. 配置并编译 (CMake Release)"],
+      "options": { "cwd": "${workspaceFolder}" }
+    },
+    {
+      "label": "5. 一键排课 (落库)",
+      "type": "shell",
+      "command": "${workspaceFolder}/build/scheduler schedule",
+      "options": { "cwd": "${workspaceFolder}" }
+    },
+    {
+      "label": "6. 循环依赖检测",
+      "type": "shell",
+      "command": "${workspaceFolder}/build/scheduler cycle-check",
+      "options": { "cwd": "${workspaceFolder}" }
+    },
+    {
+      "label": "7. 运行终端界面 (交互式)",
+      "type": "shell",
+      "command": "${workspaceFolder}/build/scheduler",
+      "dependsOn": ["1. 配置并编译 (CMake Release)"],
+      "options": { "cwd": "${workspaceFolder}" },
+      "presentation": { "reveal": "always", "panel": "dedicated", "focus": true }
+    },
+    {
+      "label": "8. 启动/检查本地 MySQL 实例",
+      "type": "shell",
+      "command": "bash scripts/mysql_ctl.sh start && bash scripts/mysql_ctl.sh status",
+      "options": { "cwd": "${workspaceFolder}" }
+    },
+    {
+      "label": "9. 一键脚本 demo (完整业务流程)",
+      "type": "shell",
+      "command": "bash run.sh demo",
+      "options": { "cwd": "${workspaceFolder}" }
+    },
+    {
+      "label": "10. 清理构建目录",
+      "type": "shell",
+      "command": "rm -rf build build-debug compile_commands.json",
+      "options": { "cwd": "${workspaceFolder}" }
+    }
+  ]
+}
