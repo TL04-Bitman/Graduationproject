@@ -1,0 +1,39 @@
+{
+  "version": 4,
+  "configurations": [
+    {
+      "name": "Linux-GCC-C++17 (项目配置)",
+      "compilerPath": "/usr/bin/g++",
+      "cStandard": "c17",
+      "cppStandard": "c++17",
+      "intelliSenseMode": "linux-gcc-x64",
+      "//1": "首选: 直接读取 CMake 导出的编译数据库, 与真实构建命令完全一致",
+      "compileCommands": "${workspaceFolder}/build/compile_commands.json",
+      "//2": "兜底: 若尚未执行过 cmake 配置(无 compile_commands.json), 则按下表解析 include",
+      "includePath": [
+        "${workspaceFolder}/include",
+        "${workspaceFolder}/include/**",
+        "${workspaceFolder}/src",
+        "${workspaceFolder}/tests",
+        "${workspaceFolder}/include/scheduler/**",
+        "${env:HOME}/.local/mysql/usr/include",
+        "/home/bob/.local/mysql/usr/include",
+        "/usr/include",
+        "/usr/include/x86_64-linux-gnu",
+        "/usr/include/c++/13",
+        "/usr/include/x86_64-linux-gnu/c++/13",
+        "/usr/include/c++/13/backward"
+      ],
+      "defines": [],
+      "browse": {
+        "path": [
+          "${workspaceFolder}/include",
+          "${workspaceFolder}/src",
+          "${workspaceFolder}/tests",
+          "${env:HOME}/.local/mysql/usr/include"
+        ],
+        "limitSymbolsToIncludedHeaders": true
+      }
+    }
+  ]
+}
