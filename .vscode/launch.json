@@ -1,0 +1,85 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "调试: scheduler (终端界面)",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/scheduler",
+      "args": [],
+      "cwd": "${workspaceFolder}",
+      "environment": [
+        { "name": "LD_LIBRARY_PATH", "value": "${env:HOME}/.local/mysql/lib" },
+        { "name": "PROJECT_ROOT", "value": "${workspaceFolder}" }
+      ],
+      "stopAtEntry": false,
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "miDebuggerPath": "/usr/bin/gdb",
+      "setupCommands": [
+        { "description": "为 gdb 启用整齐打印", "text": "-enable-pretty-printing", "ignoreFailures": true },
+        { "description": "忽略 SIGPIPE", "text": "handle SIGPIPE nostop noprint pass", "ignoreFailures": true }
+      ],
+      "preLaunchTask": "1. 配置并编译 (CMake Release)"
+    },
+    {
+      "name": "调试: scheduler init-db",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/scheduler",
+      "args": ["init-db"],
+      "cwd": "${workspaceFolder}",
+      "environment": [
+        { "name": "LD_LIBRARY_PATH", "value": "${env:HOME}/.local/mysql/lib" }
+      ],
+      "MIMode": "gdb",
+      "miDebuggerPath": "/usr/bin/gdb",
+      "preLaunchTask": "1. 配置并编译 (CMake Release)"
+    },
+    {
+      "name": "调试: scheduler schedule --dry-run",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/scheduler",
+      "args": ["schedule", "--dry-run"],
+      "cwd": "${workspaceFolder}",
+      "environment": [
+        { "name": "LD_LIBRARY_PATH", "value": "${env:HOME}/.local/mysql/lib" }
+      ],
+      "MIMode": "gdb",
+      "miDebuggerPath": "/usr/bin/gdb",
+      "preLaunchTask": "1. 配置并编译 (CMake Release)"
+    },
+    {
+      "name": "调试: 单元测试 (scheduler_tests)",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/scheduler_tests",
+      "args": [],
+      "cwd": "${workspaceFolder}",
+      "environment": [
+        { "name": "LD_LIBRARY_PATH", "value": "${env:HOME}/.local/mysql/lib" }
+      ],
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "miDebuggerPath": "/usr/bin/gdb",
+      "setupCommands": [
+        { "description": "为 gdb 启用整齐打印", "text": "-enable-pretty-printing", "ignoreFailures": true }
+      ],
+      "preLaunchTask": "1. 配置并编译 (CMake Release)"
+    },
+    {
+      "name": "调试: 单元测试 (可选过滤, 如 graph_ / cycle_)",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/scheduler_tests",
+      "args": ["cycle_"],
+      "cwd": "${workspaceFolder}",
+      "environment": [
+        { "name": "LD_LIBRARY_PATH", "value": "${env:HOME}/.local/mysql/lib" }
+      ],
+      "MIMode": "gdb",
+      "miDebuggerPath": "/usr/bin/gdb"
+    }
+  ]
+}
