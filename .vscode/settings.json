@@ -1,0 +1,52 @@
+{
+  "//": "C/C++ 扩展(ms-vscode.cpptools)与 IntelliSense 的项目级配置",
+  "C_Cpp.default.compilerPath": "/usr/bin/g++",
+  "C_Cpp.default.cppStandard": "c++17",
+  "C_Cpp.default.cStandard": "c17",
+  "C_Cpp.default.intelliSenseMode": "linux-gcc-x64",
+  "C_Cpp.default.includePath": [
+    "${workspaceFolder}/include",
+    "${workspaceFolder}/include/**",
+    "${env:HOME}/.local/mysql/usr/include"
+  ],
+  "C_Cpp.intelliSenseEngine": "default",
+  "C_Cpp.errorSquiggles": "enabled",
+  "C_Cpp.autocompleteAddParentheses": true,
+  "C_Cpp.workspaceParsingPriority": "highest",
+  "//排错": "排查 include 解析问题时临时改为 Debug, 可在 输出→C/C++ 面板看到每条解析路径",
+  "C_Cpp.loggingLevel": "Information",
+
+  "//CMake": "CMake Tools: 使用 build/ 作为构建目录, 打开工程时自动配置",
+  "cmake.buildDirectory": "${workspaceFolder}/build",
+  "cmake.configureOnOpen": true,
+  "cmake.configureArgs": ["-DCMAKE_BUILD_TYPE=Release"],
+  "cmake.exportCompileCommandsFile": true,
+  "cmake.sourceDirectory": "${workspaceFolder}",
+
+  "//文件": "源码文件类型关联与目录折叠",
+  "files.associations": {
+    "*.hpp": "cpp",
+    "*.tpp": "cpp",
+    "*.sql": "sql"
+  },
+  "files.exclude": {
+    "**/build": true,
+    "**/.cache": true
+  },
+  "search.exclude": {
+    "build": true,
+    "compile_commands.json": true
+  },
+
+  "//终端": "在 VS Code 集成终端里默认带上 MySQL 客户端库路径(直接运行 build/scheduler 时更稳)",
+  "terminal.integrated.env.linux": {
+    "LD_LIBRARY_PATH": "${env:HOME}/.local/mysql/lib:${env:LD_LIBRARY_PATH}",
+    "PROJECT_ROOT": "${workspaceFolder}"
+  },
+
+  "//编辑器": "本项目的源文件统一使用 UTF-8 与 4 空格缩进",
+  "files.encoding": "utf8",
+  "editor.tabSize": 4,
+  "editor.insertSpaces": true,
+  "files.eol": "\n"
+}
