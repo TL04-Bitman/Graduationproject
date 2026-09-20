@@ -292,12 +292,3 @@ pro1/
 cmake -S . -B build -DCMAKE_BUILD_TYPE=Release   # 配置时自动导出编译数据库
 # 构建后编译器/编辑器即可读到 build/compile_commands.json(项目根目录同时有软链接)
 ```
-
-排错步骤：
-
-1. 确认已生成：`ls build/compile_commands.json`（若缺失就执行上面的 cmake 配置命令）；
-2. VS Code 中按 `Ctrl+Shift+P` →
-   `C/C++: Reset IntelliSense Database`，或 `Developer: Reload Window`；
-3. 底部状态栏确认当前配置为 **Linux-GCC-C++17 (项目配置)**（点击可切换）；
-4. 若 MySQL 装在其他位置：`cmake -DMYSQL_PREFIX=/your/mysql ..` 并在
-   `c_cpp_properties.json` 的 `includePath` 中替换对应 `.../usr/include`。
